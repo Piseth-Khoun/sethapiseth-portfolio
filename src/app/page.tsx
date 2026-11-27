@@ -1,69 +1,92 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Download, GitBranch, Briefcase } from "lucide-react";
+import { PageReveal } from "@/components/PageReveal";
+import { ProjectCard } from "@/components/ProjectCard";
+import { projects } from "@/data/projects";
+import { profile, experience } from "@/data/profile";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <PageReveal>
+      <section className="hero">
+        <div className="hero-grid">
+          <div>
+            <span className="eyebrow">Hello, I&apos;m Khoun Sethapiseth</span>
+            <h1>Turning ideas into <span>digital experiences.</span></h1>
+            <p className="hero-role">Junior Frontend Developer</p>
+            <p className="hero-description">
+              I build modern, responsive, and user-friendly websites and applications using modern frontend technologies.
+              I enjoy solving problems, exploring new technologies, and transforming creative ideas into functional digital experiences.
+            </p>
+            <div className="hero-actions">
+              <Link className="button primary" href="/projects">Explore My Work <ArrowRight size={16} /></Link>
+              <Link className="button" href="/contact">Let&apos;s Work Together</Link>
+              <Link className="button" href="/cv"><Download size={16} /> Download CV</Link>
+            </div>
+            <div className="hero-socials">
+              <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub"><GitBranch size={17} /></a>
+              <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Briefcase size={17} /></a>
+            </div>
+          </div>
+          <div className="portrait-wrap" aria-label="Creative monogram portrait">
+            <div className="floating-tag tag-one">React / Next.js</div>
+            <div className="portrait-orbit"><div className="portrait" /></div>
+            <div className="floating-tag tag-two">Frontend Developer</div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <div><span className="eyebrow">Selected work</span><h2 className="section-title">Featured projects.</h2></div>
+            <Link className="text-link" href="/projects">View all projects <ArrowRight size={15} /></Link>
+          </div>
+          <div className="projects-grid">
+            {projects.map((project) => <ProjectCard project={project} key={project.slug} />)}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head"><div><span className="eyebrow">Technical toolkit</span><h2 className="section-title">Skills & tools.</h2></div></div>
+          <div className="skills-strip">
+            {["Java", "JavaScript", "TypeScript", "React", "Next.js", "HTML", "CSS", "Tailwind CSS", "Git", "GitHub"].map((skill) => (
+              <div className="skill-item" key={skill}>{skill}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <div><span className="eyebrow">Professional journey</span><h2 className="section-title">Experience.</h2></div>
+            <Link className="text-link" href="/about">More about me <ArrowRight size={15} /></Link>
+          </div>
+          <div className="experience-preview">
+            {experience.map((item) => (
+              <article className="experience-card" key={item.position}>
+                <span>{item.period}</span>
+                <h3>{item.position}</h3>
+                <p>{item.company}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container cta">
+        <div className="cta-inner">
+          <div>
+            <span className="eyebrow">Start a conversation</span>
+            <h2>Have an idea? Let&apos;s build it together.</h2>
+            <p>Need a modern website for your business? Let&apos;s create a professional online presence.</p>
+          </div>
+          <Link className="button primary" href="/contact">Start a Project <ArrowRight size={16} /></Link>
+        </div>
+      </section>
+    </PageReveal>
   );
 }
