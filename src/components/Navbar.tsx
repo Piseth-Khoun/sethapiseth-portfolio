@@ -34,7 +34,7 @@ export function Navbar() {
     <header className="nav-shell">
       <nav className="nav-inner" aria-label="Main navigation">
         <Link className="brand" href="/" aria-label="Home">
-          K<span>.</span>S
+          <img className="brand-logo" src="/logo-portfolio.png" alt="Khoun Sethapiseth logo" />
         </Link>
         <div className="nav-links">
           {links.map((link) => {

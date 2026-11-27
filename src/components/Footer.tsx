@@ -16,7 +16,9 @@ export function Footer() {
       </div>
       <div className="footer-inner">
         <div>
-          <Link className="footer-brand" href="/">K.S.</Link>
+          <Link className="footer-brand" href="/" aria-label="Home">
+            <img className="footer-brand-logo" src="/logo-portfolio.png" alt="Khoun Sethapiseth logo" />
+          </Link>
           <p>Creative developer crafting responsive digital experiences.</p>
         </div>
         <div className="footer-links">

@@ -31,7 +31,6 @@ export default function Home() {
 
       <section className="section">
         <Reveal className="container">
-          <div className="section-head"><div><span className="eyebrow">Technical toolkit</span><h2 className="section-title">Skills & tools.</h2></div></div>
           <SkillsShowcase />
         </Reveal>
       </section>

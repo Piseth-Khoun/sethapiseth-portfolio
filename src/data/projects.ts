@@ -8,7 +8,9 @@ export type Project = {
   technologies: string[];
   liveUrl?: string;
   githubUrl?: string;
+  downloadUrl?: string;
   screenshot?: string;
+  showcaseVideo?: string;
   accent: "blue" | "purple" | "cyan";
   overview: string;
   objectives: string[];
@@ -46,6 +48,9 @@ export const projects: Project[] = [
     description:
       "A 2D Space Shooter game focused on game logic, player and enemy interactions, and game asset integration.",
     technologies: ["Java", "Object-Oriented Programming", "2D Game Development"],
+    downloadUrl: "/projects/java-space-shooter/SpaceShooterGame.zip",
+    screenshot: "/projects/java-space-shooter/screenshot.png",
+    showcaseVideo: "/projects/java-space-shooter/showcase.mp4",
     accent: "purple",
     overview:
       "A desktop 2D game developed with Java, emphasizing object-oriented design and classic arcade gameplay.",

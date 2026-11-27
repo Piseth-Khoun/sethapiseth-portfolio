@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ExternalLink, GitBranch } from "lucide-react";
+import { ArrowLeft, Download, ExternalLink, GitBranch } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PageReveal } from "@/components/PageReveal";
 import { Reveal } from "@/components/Reveal";
@@ -49,6 +49,24 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           )}
         </div>
       </section>
+      {project.showcaseVideo && (
+        <section className="container showcase-section">
+          <div className="showcase-heading">
+            <span className="eyebrow">Gameplay showcase</span>
+            <h2>See it in action.</h2>
+          </div>
+          <video
+            className="showcase-video"
+            controls
+            playsInline
+            preload="metadata"
+            poster={project.screenshot}
+          >
+            <source src={project.showcaseVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </section>
+      )}
       <section className="section">
         <Reveal className="container detail-grid">
           <div>
@@ -71,6 +89,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               <h2>Links</h2>
               {project.liveUrl && <p><a className="text-link" href={project.liveUrl} target="_blank" rel="noreferrer">Live demo <ExternalLink size={14} /></a></p>}
               {project.githubUrl ? <p><a className="text-link" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <GitBranch size={14} /></a></p> : <p style={{ fontSize: 13 }}>Repository link not provided.</p>}
+              {project.downloadUrl && <p><a className="text-link" href={project.downloadUrl} download>Download game <Download size={14} /></a></p>}
             </article>
           </aside>
         </Reveal>
