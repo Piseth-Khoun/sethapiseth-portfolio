@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageReveal } from "@/components/PageReveal";
+import { Reveal } from "@/components/Reveal";
 import { ProjectGallery } from "@/components/ProjectGallery";
 
 export const metadata: Metadata = { title: "Projects", description: "Explore selected frontend, web, and Java development projects." };
@@ -15,7 +16,7 @@ export default function ProjectsPage() {
         </div>
       </header>
       <section className="section">
-        <div className="container"><ProjectGallery /></div>
+        <Reveal className="container"><ProjectGallery /></Reveal>
       </section>
     </PageReveal>
   );

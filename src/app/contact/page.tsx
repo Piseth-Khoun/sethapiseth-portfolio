@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GitBranch, Briefcase, Mail, MapPin, Phone } from "lucide-react";
 import { PageReveal } from "@/components/PageReveal";
+import { Reveal } from "@/components/Reveal";
 import { ContactForm } from "@/components/ContactForm";
 import { profile } from "@/data/profile";
 
@@ -17,7 +18,7 @@ export default function ContactPage() {
         </div>
       </header>
       <section className="section">
-        <div className="container contact-grid">
+        <Reveal className="container contact-grid">
           <aside className="contact-info">
             <div className="contact-item"><i><Mail size={16} /></i><div><span>Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div></div>
             <div className="contact-item"><i><Phone size={16} /></i><div><span>Phone</span><a href={`tel:${profile.phone.replace(/\s/g, "")}`}>{profile.phone}</a></div></div>
@@ -26,7 +27,7 @@ export default function ContactPage() {
             <div className="contact-item"><i><Briefcase size={16} /></i><div><span>LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noreferrer">Khoun Sethapiseth</a></div></div>
           </aside>
           <ContactForm />
-        </div>
+        </Reveal>
       </section>
     </PageReveal>
   );

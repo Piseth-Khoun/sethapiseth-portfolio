@@ -1,10 +1,19 @@
 import Link from "next/link";
-import { GitBranch, Briefcase, Mail } from "lucide-react";
+import { ArrowUpRight, GitBranch, Briefcase, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 
 export function Footer() {
   return (
     <footer className="footer">
+      <div className="footer-callout">
+        <div>
+          <span className="eyebrow">Have a good one in mind?</span>
+          <h2>Let&apos;s make something meaningful.</h2>
+        </div>
+        <Link className="footer-contact-link" href="/contact" aria-label="Contact Khoun Sethapiseth">
+          <ArrowUpRight size={24} />
+        </Link>
+      </div>
       <div className="footer-inner">
         <div>
           <Link className="footer-brand" href="/">K.S.</Link>

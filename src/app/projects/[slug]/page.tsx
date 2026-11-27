@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ExternalLink, GitBranch } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PageReveal } from "@/components/PageReveal";
+import { Reveal } from "@/components/Reveal";
 import { projects } from "@/data/projects";
 
 export function generateStaticParams() {
@@ -24,17 +26,31 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   return (
     <PageReveal>
       <section className="detail-hero">
-        <div className="container">
+        <Reveal className="container">
           <Link className="text-link" href="/projects"><ArrowLeft size={15} /> Back to projects</Link>
           <h1>{project.title}</h1>
           <div className="badges">{project.technologies.map((technology) => <span className="badge" key={technology}>{technology}</span>)}</div>
-        </div>
+        </Reveal>
       </section>
       <section className="container">
-        <div className={`detail-preview ${project.accent}`}><div className="preview-window"><i /></div></div>
+        <div className={`detail-preview ${project.accent}`}>
+          {project.screenshot ? (
+            <div className="detail-screenshot">
+              <Image
+                src={project.screenshot}
+                alt={`${project.title} project screenshot`}
+                fill
+                sizes="(max-width: 620px) calc(100vw - 32px), 1180px"
+                priority
+              />
+            </div>
+          ) : (
+            <div className="preview-window"><i /></div>
+          )}
+        </div>
       </section>
       <section className="section">
-        <div className="container detail-grid">
+        <Reveal className="container detail-grid">
           <div>
             <article className="detail-card" style={{ marginBottom: 16 }}>
               <span className="eyebrow">Overview</span>
@@ -57,18 +73,30 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               {project.githubUrl ? <p><a className="text-link" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <GitBranch size={14} /></a></p> : <p style={{ fontSize: 13 }}>Repository link not provided.</p>}
             </article>
           </aside>
-        </div>
+        </Reveal>
       </section>
       <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container">
+        <Reveal className="container">
           <div className="section-head"><div><span className="eyebrow">Continue exploring</span><h2 className="section-title">Related projects.</h2></div></div>
-          <div className="projects-grid">{related.map((item) => (
-            <article className="project-card" key={item.slug}>
-              <Link href={`/projects/${item.slug}`}><div className={`project-preview ${item.accent}`}><div className="preview-window"><i /></div></div></Link>
-              <div className="project-body"><h3>{item.title}</h3><Link className="text-link" href={`/projects/${item.slug}`}>View project</Link></div>
-            </article>
+          <div className="projects-grid">{related.map((item, index) => (
+            <Reveal key={item.slug} delay={index * 0.06}>
+              <article className="project-card">
+                <Link href={`/projects/${item.slug}`}>
+                  <div className={`project-preview ${item.accent}`}>
+                    {item.screenshot ? (
+                      <div className="project-screenshot">
+                        <Image src={item.screenshot} alt={`${item.title} project screenshot`} fill sizes="(max-width: 620px) calc(100vw - 32px), 380px" />
+                      </div>
+                    ) : (
+                      <div className="preview-window"><i /></div>
+                    )}
+                  </div>
+                </Link>
+                <div className="project-body"><h3>{item.title}</h3><Link className="text-link" href={`/projects/${item.slug}`}>View project</Link></div>
+              </article>
+            </Reveal>
           ))}</div>
-        </div>
+        </Reveal>
       </section>
     </PageReveal>
   );

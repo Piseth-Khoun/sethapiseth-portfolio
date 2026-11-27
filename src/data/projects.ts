@@ -8,6 +8,7 @@ export type Project = {
   technologies: string[];
   liveUrl?: string;
   githubUrl?: string;
+  screenshot?: string;
   accent: "blue" | "purple" | "cyan";
   overview: string;
   objectives: string[];
@@ -23,6 +24,7 @@ export const projects: Project[] = [
       "A sports web application with frontend components, category navigation, search functionality, and API error handling.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://sport-hub.vercel.app/",
+    screenshot: "/sporthub.jpg",
     accent: "blue",
     overview:
       "SportHub is a sports-focused web application that presents sports content through a responsive and approachable interface.",
@@ -62,6 +64,8 @@ export const projects: Project[] = [
     slug: "phum-yeung",
     title: "Phum Yeung Website",
     category: "Web Development",
+    screenshot: "/phum-yeung.png",
+    liveUrl: "https://sethaomg007-ctrl.github.io/superfinal/",
     description:
       "A frontend project focused on layout, styling, and interface development to improve usability and visual presentation.",
     technologies: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],

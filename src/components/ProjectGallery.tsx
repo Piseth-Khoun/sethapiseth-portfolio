@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { projects, type ProjectCategory } from "@/data/projects";
 import { ProjectCard } from "./ProjectCard";
+import { Reveal } from "./Reveal";
 
 const filters = ["All Projects", "Web Development", "Java Development", "Other Projects"] as const;
 
@@ -27,7 +28,11 @@ export function ProjectGallery() {
         ))}
       </div>
       <div className="projects-grid">
-        {visible.map((project) => <ProjectCard project={project} key={project.slug} />)}
+        {visible.map((project, index) => (
+          <Reveal key={project.slug} delay={index * 0.06}>
+            <ProjectCard project={project} />
+          </Reveal>
+        ))}
       </div>
     </>
   );

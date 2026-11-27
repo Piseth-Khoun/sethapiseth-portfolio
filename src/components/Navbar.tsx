@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const links = [
   { href: "/", label: "Home" },
@@ -16,7 +17,6 @@ const links = [
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(true);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -25,8 +25,7 @@ export function Navbar() {
   }, []);
 
   function toggleTheme() {
-    const next = !dark;
-    setDark(next);
+    const next = document.documentElement.classList.contains("light");
     document.documentElement.classList.toggle("light", !next);
     localStorage.setItem("theme", next ? "dark" : "light");
   }
@@ -41,15 +40,22 @@ export function Navbar() {
           {links.map((link) => {
             const active = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
             return (
-              <Link className={active ? "nav-link active" : "nav-link"} href={link.href} key={link.href}>
+              <Link
+                className={active ? "nav-link active" : "nav-link"}
+                href={link.href}
+                key={link.href}
+                aria-current={active ? "page" : undefined}
+              >
                 {link.label}
+                {active && <motion.span className="nav-indicator" layoutId="nav-indicator" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
               </Link>
             );
           })}
         </div>
         <div className="nav-actions">
           <button className="icon-button" type="button" onClick={toggleTheme} aria-label="Toggle color theme">
-            {dark ? <Sun size={17} /> : <Moon size={17} />}
+            <Sun className="theme-icon-sun" size={17} />
+            <Moon className="theme-icon-moon" size={17} />
           </button>
           <Link className="download-button" href="/cv">
             <Download size={16} /> CV

@@ -1,15 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 export function PageReveal({ children, className }: { children: ReactNode; className?: string }) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.main
       className={className}
-      initial={{ opacity: 0, y: 12 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.main>
